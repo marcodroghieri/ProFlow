@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProFlow - Book an Appointment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/assets/brand/logo-proflow-favicon.png">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="script/book.js" defer></script>
+</head>
+<body class="dashboard-body public-booking-body">
+
+    <main class="public-booking-container">
+        
+        <header class="public-booking-header">
+            <div class="sidebar-brand">
+                <img class="brand-logo" src="/assets/brand/logo-proflow.png" alt="logo">
+                <span class="trademark">ProFlow</span>
+            </div>
+        </header>
+
+        <section class="dashboard-content-box public-booking-box">
+            <h2>Book Your Appointment</h2>
+            <p class="subtitle">Please fill in all details to secure your spot.</p>
+
+            <form id="public-booking-form">
+                
+                <div class="form-group">
+                    <label for="client-name">Your Full Name</label>
+                    <input type="text" id="client-name" placeholder="e.g., John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="client-email">Your Email Address</label>
+                    <input type="email" id="client-email" placeholder="e.g., john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking-reason">Meeting Reason</label>
+                    <input type="text" id="booking-reason" placeholder="e.g., Marketing Consultation" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking-date">Choose Date & Time</label>
+                    <input type="datetime-local" id="booking-date" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+        </section>
+
+    </main>
+
+     <footer>
+        <nav>
+            <ul>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">Copyright @2026. ProFlow Services Inc. All Rights Reserved</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+</body>
+</html>

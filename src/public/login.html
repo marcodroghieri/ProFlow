@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ProFlow</title>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet">
+        <link rel="icon" type="image/png" href="/assets/brand/logo-proflow-favicon.png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,350,0,0" />
+        <link rel="stylesheet" href="style/style.css">
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="script/login.js" defer></script>
+    </head>
+
+    <body>
+
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html" class="logo-link">
+                            <img class="brand-logo" src="/assets/brand/logo-proflow.png" alt="logo">
+                            <span class="trademark">ProFlow</span>
+                        </a>
+                    </li>
+                    <li class="roll-btn" style="margin-left: auto;"><a class="roll-text" href="signup.html">Get Started</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="login-container">
+            <h1 class="login-title">Log in to your account</h1>
+
+            <div class="login-card">
+                <form class="login-form" action="#" method="POST">
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your email"/>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" placeholder="Enter your password"/>
+                    </div>
+
+                    <div id="error-message" class="error-box">
+                        Wrong credentials, please try again.
+                    </div>
+
+                    <button type="submit" class="btn-continue">
+                        <span class="text-menu">Continue</span>
+                    </button>
+                </form>
+
+                <div class="login-separator">
+                    <span>OR</span>
+                </div>
+
+                <div class="oauth-button">
+                    <div id="googleBtn"></div>
+                </div>
+            </div>
+
+            <p class="signup-text">
+                Don't have an account? <a href="signup.html">Sign up for free &#10142;</a>
+            </p>
+        </main>
+
+        <footer>
+            <nav>
+                <ul>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Copyright @2026. ProFlow Services Inc. All Rights Reserved</a></li>
+                </ul>
+            </nav>
+        </footer>
+        
+    </body>
+
+</html>

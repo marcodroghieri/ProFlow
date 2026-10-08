@@ -1,0 +1,892 @@
+:root {
+    --brand-primary: #0b912f;
+    --text: #476788;
+    --white: #fff;
+    --hover: #f9fafb;
+    --premium: #fef3c7;
+}
+
+/*--------- dashboard.html ---------*/
+
+.dashboard-body {
+    background-color: var(--hover);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+}
+
+/*STRUTTURA GENERALE DELLA SIDEBAR */
+.sidebar {
+    width: 17.5rem;
+    height: 100vh; /* l'altezza della sidebar è sempre pari all'altezza del viewpost (schermo visibile) independentemente da quanti appuntamenti ci sono*/
+    background-color: var(--white);
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1em;
+    box-sizing: border-box;
+    flex-shrink: 0; /* impedisce che la sidebar venga schiacciata per fare spazio ad altro*/
+    position: sticky;
+    top: 0;
+}
+
+/* HEADER: LOGO E TRADEMARK */
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.trademark {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    background: linear-gradient(to right, #1fe076 30%, #00d4ff 70%);
+
+    /* Mascheratura: il colore di sfondo resta visibile solo nella forma del testo */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Rende il testo trasparente per lasciar vedere lo sfondo sottostante */
+    -webkit-text-fill-color: transparent;
+
+    /* Colore di riserva per i browser più vecchi che non supportano il text-clipping */
+    color: var(--text);
+}
+
+.brand-logo {
+    height: 45px;
+    width: auto;
+    margin: 0;
+}
+
+/* LINK DI NAVIGAZIONE (MENU PRINCIPALE E SECONDARIO) */
+.sidebar-nav ul,
+.sidebar-sub-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sidebar-nav ul li,
+.sidebar-sub-nav ul li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Stile dei testi dei link (sovrascrive le impostazioni globali della navbar) */
+.sidebar-nav ul li a,
+.sidebar-sub-nav ul li a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+/* Stile delle icone Google Material Symbols */
+.sidebar-nav ul li .material-symbols-outlined,
+.sidebar-sub-nav ul li .material-symbols-outlined {
+    color: #64748b;
+    font-size: 1.35rem;
+}
+
+.sidebar-nav ul li:hover,
+.sidebar-sub-nav ul li:hover {
+    background-color: var(--premium);
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sidebar-nav ul li.current,
+.sidebar-sub-nav ul li.current {
+    background-color: #f0f7ff;
+}
+
+.sidebar-nav ul li.current a {
+    color: var(--brand-primary);
+    font-weight: 600;
+}
+
+.sidebar-nav ul li.current .material-symbols-outlined {
+    color: var(--brand-primary);
+}
+
+/* 5. SEZIONE FOOTER ANCORATA AL FONDO */
+.sidebar-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+}
+
+/* Box info profilo utente e pulsante logout */
+.user-profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 4px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #f1f5f9;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #334155;
+    font-size: 0.85rem;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+#user-email-display {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Tronca l'email con i tre puntini se è troppo lunga */
+    max-width: 130px;
+}
+
+.btn-logout-sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    color: #64748b;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout-sidebar:hover {
+    background-color: #fee2e2;
+    /* Sfondo rosso chiaro solo al passaggio del mouse */
+    color: #ef4444;
+    /* Icona rossa di avviso */
+}
+
+/* 1. CONTENITORE STRUTTURALE PRINCIPALE */
+.dashboard-main {
+    flex: 1;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    overflow-y: auto; /*se il tuo contenuto interno supera la tua altezza disponibile, genera una scrollbar verticale solo per te stesso, non per l'intera pagina*/
+}
+
+/* 2. HEADER DELLA DASHBOARD */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 4px 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #0f172a;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.dashboard-header .subtitle {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* 3. GRIGLIA DELLE SCHEDE INFORMATIVE (CARDS) */
+.dashboard-grid {
+    display: grid;
+    /* Crea colonne reattive: si dispongono da sole in base allo spazio (minimo 240px) */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.dash-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dash-card h3 {
+    margin: 0;
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.card-icon {
+    color: #94a3b8;
+    font-size: 1.25rem;
+}
+
+.card-value {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.card-sub {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* Testo di evidenza verde per i trend positivi */
+.text-green {
+    color: #0b912f;
+    font-weight: 600;
+}
+
+
+/* 4. PANNELLO ATTIVITÀ RECENTI (CONTENITORE BOX) */
+.dashboard-content-box {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    flex: 1;
+    /* Si allunga verticalmente per occupare tutto lo spazio in basso */
+    display: flex;
+    flex-direction: column;
+    /* Altezza minima garantita anche se vuoto */
+    height: auto;
+}
+
+.dashboard-content-box h2 {
+    margin: 0 0 24px 0;
+    font-size: 1.15rem;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Stato vuoto quando non ci sono appuntamenti nel DB */
+.empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    gap: 12px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Icona del calendario vuoto gigante al centro */
+.empty-state .material-symbols-outlined {
+    font-size: 3.2rem;
+    color: #cbd5e1;
+}
+
+.empty-state p {
+    margin: 0;
+    max-width: 440px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/*--------- agenda.html ---------*/
+
+/* REGOLE SPECIFICHE PER IL FORM DELL'AGENDA */
+.agenda-form-container {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#appointment-form {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 220px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-group input {
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.form-group input:focus {
+    border-color: #0b912f;
+}
+
+.submit-btn {
+    background-color: #0b912f;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #097325;
+}
+
+/* FORMATTAZIONE ELEMENTI LISTA GENERATI DA JS */
+.appointments-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.appointment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.appointment-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.appointment-icon {
+    color: #0b912f;
+}
+
+.btn-delete-appointment {
+    background-color: #0b912f;
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.appointment-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#appointments-container {
+    height: auto;
+    overflow: visible;
+}
+
+.agenda-filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.agenda-filters input,
+.agenda-filters select {
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.agenda-filters input:focus,
+.agenda-filters select:focus {
+    border-color: #0b912f;
+}
+
+#filter-search {
+    flex: 1;
+    min-width: 180px;
+}
+
+#filter-reset {
+    padding: 10px 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #ffffff;
+    background-color: var(--brand-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#filter-reset:hover {
+    background-color: #097325;
+}
+
+/*--------- booking-link.html ---------*/
+
+.subtitle {
+    margin-bottom: 20px;
+}
+
+.booking-link-share-box {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: fit-content;  /* il contenitore si adatta ESATTAMENTE ai suoi contenuti, niente spazio extra */
+    justify-content: flex-start; /* forza l'allineamento a sinistra */
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+#booking-url-input {
+    font-family: monospace;
+    background-color: #f9fafb;
+    box-sizing: border-box;
+    width: 600px;
+}
+
+#btn-copy-link {
+    white-space: nowrap;
+    height: 46px;
+    padding: 0 24px;
+}
+
+/*--------- upgrade-plan.html ---------*/
+
+.pricing-container-wrapper {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+}
+
+.plan-upgrade-box {
+    background-color: #f8fafc;
+    /* Grigio leggero coordinato con il box info utente */
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 32px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.plan-featured-border {
+    border: 2px solid #0b912f;
+    /* Bordo verde brand ProFlow */
+    box-shadow: 0 10px 25px rgba(11, 145, 47, 0.06);
+}
+
+.plan-recommended-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0b912f;
+    color: var(--white);
+    padding: 4px 14px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.plan-upgrade-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+    /* Grigio scuro coordinato con i titoli della dashboard */
+    margin: 0 0 4px 0;
+}
+
+.plan-upgrade-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.plan-upgrade-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.4;
+}
+
+.plan-upgrade-features li strong {
+    color: #0f172a;
+}
+
+.plan-upgrade-features li.up-disabled {
+    color: #94a3b8;
+    text-decoration: line-through;
+}
+
+.plan-upgrade-features .up-check {
+    color: #2ecc71;
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+.plan-upgrade-features .up-premium-icon {
+    color: #0b912f;
+    font-weight: bold;
+}
+
+.plan-upgrade-features .up-close {
+    color: #ef4444;
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+.plan-upgrade-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    margin-top: auto;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.current-active-plan {
+    background-color: #cbd5e1;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.plan-submit-upgrade {
+    background-color: #0b912f;
+    color: var(--white);
+    transition: background-color 0.2s ease;
+}
+
+.plan-submit-upgrade:hover {
+    background-color: #097325;
+}
+
+/*--------- analytics.html---------*/
+
+.locked-feature-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    margin: auto;
+    max-width: 460px;
+}
+
+.locked-feature-container .locked-icon {
+    font-size: 3.5rem;
+    color: #94a3b8;
+    /* Colore grigio chiaro per l'icona del lucchetto */
+    margin-bottom: 16px;
+    background-color: #f1f5f9;
+    padding: 16px;
+    border-radius: 50%;
+}
+
+.locked-feature-container h2 {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin: 0 0 8px 0;
+}
+
+.locked-feature-container p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+}
+
+/* Serve per allineare correttamente il tag <a> trasformato in pulsante */
+.text-center-btn {
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+/*--------- dashboard.html - Recent Activity CTA ---------*/
+
+.activity-cta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    padding: 40px 20px;
+}
+
+.activity-cta-icon {
+    font-size: 3.5rem;
+    color: var(--brand-primary);
+    background-color: #f0fdf4;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.activity-cta-title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.activity-cta-subtitle {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    max-width: 380px;
+    line-height: 1.5;
+}
+
+.activity-cta-btn {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+/*--------- invoices.html ---------*/
+
+#btn-export-csv {
+    width: auto;
+    display: inline-block;
+    padding: 10px 24px;
+}
+
+.invoices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.invoices-header h2 {
+    margin: 0;
+}
+
+.invoices-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.invoices-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.invoices-thead-row {
+    border-bottom: 2px solid #e2e8f0;
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.invoices-th {
+    padding: 12px;
+}
+
+.invoices-th--center {
+    text-align: center;
+}
+
+.invoice-row {
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+.invoice-title,
+.invoice-date {
+    padding: 16px 12px;
+}
+
+.invoice-amount {
+    padding: 16px 12px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.invoice-status-cell {
+    padding: 16px 12px;
+    text-align: center;
+}
+
+.invoice-status-toggle-btn {
+    background-color: #ffedd5;
+    color: #ea580c;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    min-width: 95px;
+    transition: all 0.2s ease;
+}
+
+/* FOOTER MINIMALE PER LE PAGINE PRIVATE */
+.dashboard-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.dashboard-footer p {
+    margin: 0;
+}
+
+/* Il pulsante hamburger è nascosto su desktop e appare solo su mobile (vedi media query) */
+.hamburger-btn,
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+        padding: 5px 7px;
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 998;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    }
+
+    .hamburger-btn span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background-color: #334155;
+        border-radius: 2px;
+    }
+
+    .dashboard-main {
+        padding: 16px;
+        padding-top: 64px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-body {
+        flex-direction: column;
+    }
+}
