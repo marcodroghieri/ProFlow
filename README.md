@@ -40,10 +40,11 @@ npm install
 
 ### 3. Configurare le variabili d'ambiente
 
-Verificare che nella cartella radice sia presente il file `.env` con il seguente contenuto:
+Creare nella cartella radice il file `.env` (non incluso nel repository) con il seguente contenuto:
 
 ```
 JWT_SECRET=your_secret_key_here
+DB_PASSWORD=your_postgres_password
 ```
 
 ### 4. Avviare il server
@@ -86,8 +87,7 @@ progetto/
 │       ├── style/             # Foglio di stile delle pagine private
 │       └── script/            # Script JS delle pagine private
 ├── assets/                    # Immagini e loghi
-├── mock-up/                   # Proposta progettuale e mockup
-├── .env                       # Variabili d'ambiente (JWT secret)
+├── .env                       # Variabili d'ambiente (JWT secret, password del database): locale, non nel repository
 └── package.json               # Dipendenze e script npm
 ```
 
